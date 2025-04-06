@@ -1,7 +1,6 @@
-![Screenshot_3](https://github.com/user-attachments/assets/b8968abb-11e4-4def-b8bd-a284e13f4de3)
+![Asset 5@5x-100](https://github.com/user-attachments/assets/6f973790-1429-4d92-be14-e39b43a37dc4)
 
 # Pseudo-Cloud
-
 Pseudo-Cloud is a web application that emulates a cloud terminal experience, allowing users to interact with a simulated cloud environment through their browser. This project utilizes Docker for containerization and Cloudflare Tunnels to securely expose the application to the internet without the need for a public IP address or complex firewall configurations.
 
 ## Features
