@@ -25,8 +25,8 @@ ARG USER_PASSWORD
 ARG ALLOW_ROOT
 
 # Provide default values if not supplied
-ENV USER_NAME=${USER_NAME:-myuser}
-ENV USER_PASSWORD=${USER_PASSWORD:-mypassword}
+ENV USER_NAME=${USER_NAME:-0xAhmadYousuf}
+ENV USER_PASSWORD=${USER_PASSWORD:-password}
 ENV ALLOW_ROOT=${ALLOW_ROOT:-false}
 
 # Create a non-root user if ALLOW_ROOT is false

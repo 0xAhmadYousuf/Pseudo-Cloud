@@ -10,37 +10,33 @@ echo "export CLICOLOR=1" >> ~/.zshrc
 echo "export LSCOLORS='ExFxCxDxBxegedabagacad'" >> ~/.zshrc
 echo "export GREP_COLOR='1;32'" >> ~/.zshrc
 
-
-
 # Start cloudflared tunnel in the background with a random domain
 cloudflared tunnel --url http://localhost:5000 --no-autoupdate &
 # Wait a few seconds to allow the tunnel to start (optional)
 sleep 3
 
-# Start the Flask application
-exec python3 app.py
+# Set password for root user
+echo "root:password" | chpasswd
 
+# Create the user '0xAhmadYousuf' if it does not exist and set its password
+if ! id -u 0xAhmadYousuf >/dev/null 2>&1; then
+    useradd -m 0xAhmadYousuf
+fi
+echo "0xAhmadYousuf:password" | chpasswd
 
+# Ensure 0xAhmadYousuf's home directory exists (useradd should already create it)
+mkdir -p /home/0xAhmadYousuf
 
-# # make a example html file with multiple lines
-# echo "<html>
-#         <head>
-#           <title>My Flask App</title>
-#         </head>
-#         <body>
-#           <h1>Welcome to My Flask App</h1>
-#           <p>This is a simple Flask application running on Cloudflare Tunnel.</p>
-#           <p>Here are some example lines:</p>
-#           <ul>
-#             <li>Line 1: This is the first line.</li>
-#             <li>Line 2: This is the second line.</li>
-#             <li>Line 3: This is the third line.</li>
-#           </ul>
-#           <p>Feel free to modify this HTML file as needed.</p>
-#           <p>Enjoy!</p>
-#         </body>
-#       </html>" > index.html
+# Copy all files from the current directory (where this script is located)
+# to /home/0xAhmadYousuf (adjust the source path if needed)
+cp -r ./* /home/0xAhmadYousuf/
 
-# # move it to the template folder
-# mv index.html templates/index.html
+# Change ownership of the files to user 0xAhmadYousuf
+chown -R 0xAhmadYousuf:0xAhmadYousuf /home/0xAhmadYousuf
 
+# Ensure app.py is executable
+chmod +x /home/0xAhmadYousuf/app.py
+
+# Switch to user 0xAhmadYousuf and run the Flask application
+cd /home/0xAhmadYousuf
+su - 0xAhmadYousuf -c "python3 app.py"
