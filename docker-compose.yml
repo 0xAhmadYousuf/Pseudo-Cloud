@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  pseudo-cloud:
+    build:
+      context: .
+      args:
+        USER_NAME: ${USER_NAME}
+        USER_PASSWORD: ${USER_PASSWORD}
+        ALLOW_ROOT: ${ALLOW_ROOT}
+        FINAL_USER: ${FINAL_USER}
+    ports:
+      - "5000:5000"
+    environment:
+      TERM: xterm-256color
+    user: ${FINAL_USER}
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - .:/app
